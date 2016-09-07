@@ -110,7 +110,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Action.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Problem.cpp" />
     <ClCompile Include="Source.cpp" />

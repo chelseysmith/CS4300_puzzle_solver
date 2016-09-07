@@ -6,12 +6,11 @@
 class Problem
 {
 public:
-	Problem();
 	Problem(State state);
 	~Problem();
 
-	std::vector<State> Actions(State state);
-	State Result(State state, Action action);
+	std::vector<Action::move> Actions(State state);
+	State Result(State state, Action::move action);
 	bool Goal_test(State state);
 
 private:

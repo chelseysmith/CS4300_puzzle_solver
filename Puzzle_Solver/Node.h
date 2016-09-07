@@ -6,17 +6,17 @@
 class Node
 {
 public:
-	Node();
-	Node(State state, Node* parent, Action action);
+	Node(Node& node);
+	Node(State state, Node* parent, Action::move action);
 	~Node();
 
 	State Get_state();
 	Node Get_parent();
-	Action Get_action();
+	Action::move Get_action();
 
 private:
 	State m_state;
 	Node* m_parent;
-	Action m_action;
+	Action::move m_action;
 };
 

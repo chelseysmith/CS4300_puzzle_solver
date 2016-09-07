@@ -2,7 +2,6 @@
 class Action
 {
 public:
-	Action();
-	~Action();
+	enum move { left, up, right, down, empty };
 };
 
