@@ -44,9 +44,9 @@ std::vector<Action::move> Problem::Actions(State state)
 
 	//{left, right}
 	if (n <= 0)
-		moves.push_back(Action::move::right);
-	else if (n >= state.Get_grid_size() - 1)
 		moves.push_back(Action::move::left);
+	else if (n >= state.Get_grid_size() - 1)
+		moves.push_back(Action::move::right);
 	else
 	{
 		moves.push_back(Action::move::right);
@@ -93,13 +93,13 @@ State Problem::Result(State state, Action::move action)
 	if (action == Action::move::left)
 	{
 		tile_m = m;
-		tile_n = n - 1;
+		tile_n = n + 1;
 	}
 	
 	if (action == Action::move::right)
 	{
 		tile_m = m;
-		tile_n = n + 1;
+		tile_n = n - 1;
 	}
 
 	tile = state.Get_tiles()[tile_m][tile_n];
