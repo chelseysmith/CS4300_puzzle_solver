@@ -8,23 +8,45 @@
 
 int main(int argc, char *argv[])
 {
-	std::cout << "Have " << argc << " arguments:" << std::endl;
-	for (int i = 0; i < argc; ++i) {
-		std::cout << argv[i] << std::endl;
-	}
+	int line;
+	int count = -1;
+	int grid_size;
 
-	State initial_state;
+	std::vector<std::vector<int>> tiles;
+	std::vector<int> row;
+
+	while (std::cin >> line && !std::cin.eof())
+	{
+		if (count == -1)
+			grid_size = line;
+		else
+		{
+			if (count > 0 && count % grid_size == 0)
+			{
+				tiles.push_back(row);
+				row.clear();
+			}
+			row.push_back(line);
+		}
+
+		count++;
+	}
+	tiles.push_back(row);
+
+
+	State initial_state(grid_size, tiles);
 	Problem p(initial_state);
 
-	Node inital_node(initial_state, nullptr, Action::move::empty);
+	Node n(initial_state, nullptr, Action::move::empty);
 	std::queue<Node> q;
 
-	q.push(inital_node);
+	q.push(n);
 	
 	//FIND SOLUTION
 	while (q.size() > 0)
 	{
-		Node n(q.pop());
+		n = q.front();
+		q.pop();
 
 		if (p.Goal_test(n.Get_state()))
 			break;
@@ -34,7 +56,7 @@ int main(int argc, char *argv[])
 		for (size_t i = 0; i < actions.size(); i++)
 		{
 			State s = p.Result(n.Get_state(), actions[i]);
-			Node child(n.Get_state(), &n, actions[i]);
+			Node child(s, &n, actions[i]);
 			q.push(child);
 		}
 	}
@@ -42,9 +64,20 @@ int main(int argc, char *argv[])
 	//RECONSTRUCT PATH
 	std::vector<Action::move> path;
 
-	while (true)
+	while (&n.Get_parent() != nullptr)
 	{
-		break;
+		path.push_back(n.Get_action());
+		n = n.Get_parent();
 	}
-	
+
+	//ITERATE IN REVERSE AND DISPLAY
+	for (int i = path.size() -1; i > -1; i--)
+	{
+		if (path.size() - 1)
+			std::cout << path[i];
+		else
+			std::cout << ',' << path[i];
+	}
+
+	return 0;
 }

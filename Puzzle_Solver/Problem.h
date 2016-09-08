@@ -2,6 +2,7 @@
 #include "Action.h"
 #include "State.h"
 #include <vector>
+#include <algorithm> 
 
 class Problem
 {

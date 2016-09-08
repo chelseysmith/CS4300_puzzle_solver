@@ -6,7 +6,7 @@
 class Node
 {
 public:
-	Node(Node& node);
+	//Node(Node& node);
 	Node(State state, Node* parent, Action::move action);
 	~Node();
 
