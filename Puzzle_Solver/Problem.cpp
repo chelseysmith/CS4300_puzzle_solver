@@ -93,13 +93,13 @@ State Problem::Result(State state, Action::move action)
 	if (action == Action::move::left)
 	{
 		tile_m = m;
-		tile_n = n + 1;
+		tile_n = n - 1;
 	}
 	
 	if (action == Action::move::right)
 	{
 		tile_m = m;
-		tile_n = n - 1;
+		tile_n = n + 1;
 	}
 
 	tile = state.Get_tiles()[tile_m][tile_n];
@@ -117,11 +117,13 @@ bool Problem::Goal_test(State state)
 
 	//DEFINE GOAL STATE
 	std::vector<int> goal_state_temp;
+	std::vector<int> current_state;
 	for (size_t i = 0; i < state.Get_grid_size(); i++)
 	{
 		for (size_t j = 0; j < state.Get_grid_size(); j++)
 		{
 			goal_state_temp.push_back(state.Get_tiles()[i][j]);
+			current_state.push_back(state.Get_tiles()[i][j]);
 		}
 	}
 
@@ -137,7 +139,18 @@ bool Problem::Goal_test(State state)
 	}
 	
 
-	//ITERATE OVER STATE AND COMPAIR WITH GOAL STATE
+	//ITERATE OVER CURRENT STATE AND COMPAIR WITH GOAL STATE
+	for (size_t i = 0; i < current_state.size(); i++)
+	{
+		for (size_t j = 0; j < goal_state.size(); j++)
+		{
+			if (i == j)
+			{
+				if (current_state[i] != goal_state[j])
+					return false;
+			}
+		}
+	}
 
-	return false;
+	return true;
 }
