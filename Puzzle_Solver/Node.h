@@ -14,6 +14,8 @@ public:
 	Node Get_parent();
 	Action::move Get_action();
 
+	
+
 private:
 	State m_state;
 	Node* m_parent;

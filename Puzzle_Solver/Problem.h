@@ -15,6 +15,6 @@ public:
 	bool Goal_test(State state);
 
 private:
-	State m_state;
+	std::vector<int> m_goal_state;
 };
 
